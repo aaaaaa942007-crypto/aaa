@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نحو حوكمة عالمية آمنة للذكاء الاصطناعي — البراء عبد الرحمن</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --accent: #c0392b;
+    --accent2: #1a3a5c;
+    --gold: #b8860b;
+    --muted: #6b6460;
+    --line: rgba(13,13,13,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Cairo', sans-serif;
+    font-weight: 400;
+    line-height: 1.9;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.6;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 1.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--accent2);
+    letter-spacing: 0.02em;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    margin-right: 2rem;
+    transition: color 0.2s;
+    font-weight: 600;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 4rem;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.25;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .author-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--accent2);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+  }
+  .author-name { font-weight: 700; font-size: 1rem; }
+  .author-role { font-size: 0.82rem; color: var(--muted); }
+
+  .hero-deco {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--line);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  /* Big quote */
+  .big-quote {
+    background: var(--accent2);
+    color: white;
+    padding: 5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .big-quote::before {
+    content: '"';
+    font-family: 'Amiri', serif;
+    font-size: 20rem;
+    position: absolute;
+    top: -4rem;
+    right: 2rem;
+    opacity: 0.07;
+    line-height: 1;
+    color: white;
+  }
+  .big-quote blockquote {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .big-quote cite {
+    display: block;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    font-style: normal;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  /* Content */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section {
+    margin-bottom: 4.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .section.visible { opacity: 1; transform: none; }
+
+  .section-number {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-number::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  h2 {
+    font-family: 'Amiri', serif;
+    font-size: 2rem;
+    color: var(--accent2);
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: #2a2520;
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
+  /* Hierarchy */
+  .hierarchy {
+    margin: 3rem 0;
+    position: relative;
+  }
+
+  .tier {
+    display: flex;
+    align-items: stretch;
+    margin-bottom: 0.4rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.5s;
+  }
+  .tier.visible { opacity: 1; transform: none; }
+
+  .tier-num {
+    width: 3rem;
+    min-width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .tier-body {
+    flex: 1;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid var(--line);
+    border-right: none;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .tier-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+  .tier-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+    text-align: right;
+  }
+
+  .tier-1 .tier-num { background: var(--accent2); }
+  .tier-2 .tier-num { background: #2e6da4; }
+  .tier-3 .tier-num { background: #4a90b8; }
+  .tier-4 .tier-num { background: #7fb3cc; }
+
+  .tier-1 .tier-body { border-color: var(--accent2); background: rgba(26,58,92,0.04); }
+  .tier-2 .tier-body { border-color: #2e6da4; background: rgba(46,109,164,0.03); }
+  .tier-3 .tier-body { border-color: #4a90b8; background: rgba(74,144,184,0.03); }
+  .tier-4 .tier-body { border-color: #7fb3cc; background: rgba(127,179,204,0.03); }
+
+  /* Decision grid */
+  .decisions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .decision-card {
+    border: 1px solid var(--line);
+    padding: 1.4rem;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .decision-card:hover {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .decision-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 3px;
+    height: 100%;
+  }
+  .dc-1::before { background: var(--accent); }
+  .dc-2::before { background: var(--accent2); }
+  .dc-3::before { background: var(--gold); }
+  .dc-4::before { background: #5a8a6a; }
+
+  .dc-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .dc-1 .dc-label { color: var(--accent); }
+  .dc-2 .dc-label { color: var(--accent2); }
+  .dc-3 .dc-label { color: var(--gold); }
+  .dc-4 .dc-label { color: #5a8a6a; }
+
+  .dc-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+  .dc-desc { font-size: 0.82rem; color: var(--muted); margin: 0; }
+
+  /* Pillars */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+  .pillar {
+    padding: 1.6rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: box-shadow 0.2s;
+  }
+  .pillar:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.1); }
+  .pillar-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .pillar-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    color: var(--accent2);
+  }
+  .pillar-text { font-size: 0.85rem; color: var(--muted); margin: 0; }
+
+  /* Conclusion banner */
+  .conclusion {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5rem 4rem;
+    text-align: center;
+  }
+  .conclusion h2 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--paper);
+    margin-bottom: 1.5rem;
+  }
+  .conclusion p {
+    color: rgba(245,240,232,0.75);
+    max-width: 650px;
+    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    border: 1px solid rgba(245,240,232,0.4);
+    color: var(--paper);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    border-radius: 3px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn:hover { background: var(--paper); color: var(--ink); }
+
+  /* Footer */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* Divider */
+  .divider {
+    width: 4rem;
+    height: 2px;
+    background: var(--accent);
+    margin: 1.5rem 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 700px) {
+    header { padding: 1rem 1.5rem; }
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .big-quote { padding: 3rem 1.5rem; }
+    .content { padding: 3rem 1.5rem; }
+    .decisions, .pillars { grid-template-columns: 1fr; }
+    .conclusion { padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .hero-deco { display: none; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">البراء عبد الرحمن</div>
+  <nav>
+    <a href="#problem">المشكلة</a>
+    <a href="#hierarchy">الهرم</a>
+    <a href="#decisions">القرارات</a>
+    <a href="#pillars">الركائز</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-deco">AI Governance 2025</div>
+  <div class="hero-tag">ورقة بحثية</div>
+  <h1>نحو حوكمة عالمية آمنة للذكاء الاصطناعي</h1>
+  <p class="hero-sub">إطار مقترح للرقابة الديمقراطية على تطور الذكاء الاصطناعي يجمع بين الكفاءة التقنية والتمثيل الشعبي الواسع</p>
+  <div class="author-line">
+    <div class="author-avatar">ب</div>
+    <div>
+      <div class="author-name">البراء عبد الرحمن</div>
+      <div class="author-role">باحث في حوكمة الذكاء الاصطناعي</div>
+    </div>
+  </div>
+</section>
+
+<div class="big-quote">
+  <blockquote>
+    الذكاء الاصطناعي أمانة في أيدي البشرية جمعاء، لا حِكراً لفرد أو دولة أو شركة
+    <cite>— البراء عبد الرحمن</cite>
+  </blockquote>
+</div>
+
+<div class="content">
+
+  <div class="section" id="problem">
+    <div class="section-number">01 — المشكلة</div>
+    <h2>لماذا نحتاج إلى حوكمة عالمية؟</h2>
+    <div class="divider"></div>
+    <p>يشهد الذكاء الاصطناعي تطوراً متسارعاً يفوق قدرة المؤسسات الدولية الحالية على مواكبته وتنظيمه. في غياب إطار حوكمة واضح، يظل خطر توظيف هذه التكنولوجيا لأغراض ضارة قائماً، سواء من قِبل جهات حكومية أو أفراد يمتلكون الموارد اللازمة.</p>
+    <p>التحدي الأكبر ليس في التكنولوجيا ذاتها، بل في غياب إطار أخلاقي وقانوني دولي يضمن توجيهها نحو خدمة الإنسان لا الإضرار به. الحل يكمن في بناء نظام حوكمة شفاف وديمقراطي يجمع بين التخصص التقني والمشاركة الشعبية الحقيقية.</p>
+  </div>
+
+  <div class="section" id="hierarchy">
+    <div class="section-number">02 — النظام الهرمي</div>
+    <h2>التسلسل الهرمي للسلطة</h2>
+    <div class="divider"></div>
+    <p>يقوم الإطار المقترح على أربعة مستويات متكاملة، تضمن المشاركة الشاملة مع الحفاظ على الكفاءة في اتخاذ القرار.</p>
+
+    <div class="hierarchy">
+      <div class="tier tier-1">
+        <div class="tier-num">١</div>
+        <div class="tier-body">
+          <div class="tier-title">البشرية كقمة الهرم</div>
+          <p class="tier-desc">تمثل البشرية جمعاء السلطة العليا في أي قرار وجودي. القرارات الكبرى تستوجب استفتاءً عالمياً حقيقياً.</p>
+        </div>
+      </div>
+      <div class="tier tier-2">
+        <div class="tier-num">٢</div>
+        <div class="tier-body">
+          <div class="tier-title">هيئة دولية متخصصة مستقلة</div>
+          <p class="tier-desc">علماء وخبراء من تخصصات متعددة، مستقلون عن سيطرة أي دولة أو شركة، مسؤولون عن القرارات التقنية الكبرى.</p>
+        </div>
+      </div>
+      <div class="tier tier-3">
+        <div class="tier-num">٣</div>
+        <div class="tier-body">
+          <div class="tier-title">المتخصصون والمبسِّطون</div>
+          <p class="tier-desc">يتولون دراسة القرارات وتبسيطها وبناء صور واضحة عن المستقبل المترتب على كل خيار لتمكين المشاركة الواعية.</p>
+        </div>
+      </div>
+      <div class="tier tier-4">
+        <div class="tier-num">٤</div>
+        <div class="tier-body">
+          <div class="tier-title">المواطنون العامون</div>
+          <p class="tier-desc">يشاركون في القرارات التي تؤثر على حياتهم اليومية، مع حد أدنى للعمر (21 عاماً للقرارات الكبرى) وتعليم أساسي في المجال.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="decisions">
+    <div class="section-number">03 — تصنيف القرارات</div>
+    <h2>مستويات القرار</h2>
+    <div class="divider"></div>
+    <p>تُصنَّف القرارات حسب تأثيرها وتعقيدها، لضمان وصولها للمستوى المناسب من الهرم.</p>
+
+    <div class="decisions">
+      <div class="decision-card dc-1">
+        <div class="dc-label">المستوى الأول</div>
+        <div class="dc-title">قرارات وجودية</div>
+        <p class="dc-desc">تحتاج موافقة البشرية عبر استفتاء عالمي شامل</p>
+      </div>
+      <div class="decision-card dc-2">
+        <div class="dc-label">المستوى الثاني</div>
+        <div class="dc-title">قرارات استراتيجية</div>
+        <p class="dc-desc">تختص بها الهيئة الدولية والمتخصصون</p>
+      </div>
+      <div class="decision-card dc-3">
+        <div class="dc-label">المستوى الثالث</div>
+        <div class="dc-title">قرارات تشغيلية</div>
+        <p class="dc-desc">تشمل المواطنين المعنيين مباشرة</p>
+      </div>
+      <div class="decision-card dc-4">
+        <div class="dc-label">المستوى الرابع</div>
+        <div class="dc-title">قرارات يومية</div>
+        <p class="dc-desc">يتخذها الذكاء الاصطناعي تلقائياً ضمن قيود محددة</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="pillars">
+    <div class="section-number">04 — ركائز النجاح</div>
+    <h2>ما الذي يجعل هذا النظام يعمل؟</h2>
+    <div class="divider"></div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-icon">📚</span>
+        <div class="pillar-title">التعليم المبكر</div>
+        <p class="pillar-text">إدراج مناهج الذكاء الاصطناعي وأخلاقياته في التعليم الأساسي لبناء جيل واعٍ</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🔍</span>
+        <div class="pillar-title">الشفافية الكاملة</div>
+        <p class="pillar-text">كود مفتوح المصدر ورقابة مجتمعية على القرارات الكبرى دون استثناء</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🌍</span>
+        <div class="pillar-title">التمثيل العادل</div>
+        <p class="pillar-text">ضمان تمثيل جميع الفئات والثقافات في الهيئة الدولية المتخصصة</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🔄</span>
+        <div class="pillar-title">المراجعة المستمرة</div>
+        <p class="pillar-text">تحديث الإطار بصفة دورية مواكبةً للتطورات التكنولوجية المتسارعة</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="conclusion">
+  <h2>الخلاصة</h2>
+  <p>الذكاء الاصطناعي أمانة في أيدي البشرية جمعاء. الإطار المقترح يسعى إلى ضمان أن يظل هذا التطور التقني في خدمة الإنسان ورفاهيته، من خلال رقابة ديمقراطية حقيقية تجمع بين الكفاءة التقنية والتمثيل الشعبي الواسع.</p>
+  <a href="mailto:?" class="btn">تواصل مع الكاتب</a>
+</div>
+
+<footer>
+  <span>© 2025 البراء عبد الرحمن — جميع الحقوق محفوظة</span>
+  <span>حوكمة الذكاء الاصطناعي • ورقة بحثية</span>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section, .tier, .decision-card, .pillar').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
